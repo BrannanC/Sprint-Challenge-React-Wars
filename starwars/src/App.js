@@ -13,7 +13,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getCharacters('https://swapi.co/api/people');
-    this.getFilmTitles();
   }
 
   getCharacters = URL => {
@@ -32,28 +31,6 @@ class App extends Component {
       });
   };
 
-  getFilmTitles = () => {
-    this.state.starwarsChars.map((character, charIdx) => {
-      character.films.map((URL, i) => {
-        fetch(URL)
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          let newChars = [...this.state.starwarsChars];
-          newChars.charIdx.i = data.title;
-          console.log(data.title);
-          // this.setState({
-          //   starwarsChars: [...prevState.starwarsChars],
-
-          // })
-        })
-        .catch(err => {
-          throw new Error(err);
-        });
-      });
-    })
-  }
 
   render() {
     console.log()
@@ -61,8 +38,7 @@ class App extends Component {
       <div className="App">
         <h1 className="Header">React Wars</h1>
         <CharacterList 
-          characters={this.state.starwarsChars} 
-          getFilm={this.getFilm}
+          characters={this.state.starwarsChars}
         />
       </div>
     );
